@@ -161,54 +161,40 @@ img, video { max-width: 100%; display: block; }
   z-index: 1;
 }
 
-/* nome fixo, sincronizado via JS (orb.js) com a esfera "logo".
-   left/top ficam em 0 porque o JS já calcula a posição em pixels
-   absolutos via transform a cada frame. */
-.hero__logo {
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translate3d(70vw, 42vh, 0) translate(-50%, -50%);
-  z-index: 2;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1rem, 2.6vw, 1.5rem);
-  line-height: 1.1;
-  white-space: nowrap;
-  background: var(--gradient-warm);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: 0.01em;
-  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.5));
-  pointer-events: none;
-  will-change: transform;
-}
-
 .hero__stage {
   position: relative;
   z-index: 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-xl);
-  max-width: 1080px;
+  text-align: center;
+  gap: var(--space-sm);
+  max-width: 560px;
   width: 100%;
-  flex-wrap: wrap;
+  /* flutua suavemente em sincronia com o cluster de esferas (ver orb.js) */
+  transform: translate(var(--orb-x, 0px), var(--orb-y, 0px));
+  will-change: transform;
 }
 
-.hero__intro {
-  flex: 1 1 380px;
-  max-width: 460px;
-  text-align: left;
+.hero__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 11vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  background: var(--gradient-warm);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 6px 30px rgba(255,61,119,0.35));
 }
 
 .hero__badges {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin: var(--space-sm) 0;
+  justify-content: center;
+  margin-top: 0.25rem;
 }
 
 .badge {
@@ -220,20 +206,14 @@ img, video { max-width: 100%; display: block; }
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.85);
-  backdrop-filter: blur(6px);
-}
-
-.hero__visual {
-  flex: 0 1 320px;
-  display: flex;
-  justify-content: center;
 }
 
 .hero__photo-box {
-  width: min(70vw, 300px);
+  width: min(58vw, 240px);
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
-  padding: 6px;
+  padding: 5px;
+  margin: var(--space-xs) 0;
   background: var(--gradient-primary);
   box-shadow: 0 30px 70px -20px rgba(255,61,119,0.4), 0 20px 60px -20px rgba(124,58,237,0.35);
 }
@@ -247,23 +227,18 @@ img, video { max-width: 100%; display: block; }
 }
 
 .hero__tagline {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.6;
   color: rgba(255,255,255,0.82);
   font-weight: 300;
-  margin-bottom: var(--space-md);
 }
 
 .hero__ctas {
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
-}
-
-@media (max-width: 760px) {
-  .hero__stage { text-align: center; }
-  .hero__intro { text-align: center; }
-  .hero__badges { justify-content: center; }
+  justify-content: center;
+  margin-top: 0.25rem;
 }
 
 .scroll-cue {
