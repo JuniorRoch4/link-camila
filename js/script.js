@@ -30,4 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     heroObserver.observe(hero);
   }
+
+  // ===================================================
+  // CARD DA FOTO — tilt 3D sutil ao passar mouse/dedo por cima
+  // ===================================================
+  const photoCard = document.querySelector('.hero__photo-box');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (photoCard && !reduceMotion) {
+    const base = { x: 6, y: -10 };
+
+    photoCard.addEventListener('pointermove', (e) => {
+      const rect = photoCard.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      const rx = base.x - py * 16;
+      const ry = base.y + px * 16;
+      photoCard.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+
+    const resetTilt = () => {
+      photoCard.style.transform = `rotateX(${base.x}deg) rotateY(${base.y}deg)`;
+    };
+    photoCard.addEventListener('pointerleave', resetTilt);
+    photoCard.addEventListener('pointerup', resetTilt);
+  }
 });
