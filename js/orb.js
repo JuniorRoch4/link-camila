@@ -43,27 +43,32 @@ if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   }
   scene.environment = createEnvTexture();
 
-  // tons neutros de cinza/prata — sem matiz colorido
-  const TINTS = [0xC9C9CE, 0xB3B3B9, 0xE2E2E6];
+  // tons neutros quase brancos — a transparência faz o trabalho visual
+  const TINTS = [0xF2F2F5, 0xE6E6EA, 0xFAFAFC];
 
   function makeMaterial(colorHex) {
     return new THREE.MeshPhysicalMaterial({
       color: colorHex,
-      metalness: 1,
-      roughness: 0.16,
-      clearcoat: 0.8,
-      clearcoatRoughness: 0.15,
-      envMapIntensity: 1.7,
+      metalness: 0.05,
+      roughness: 0.04,
+      transmission: 1,
+      thickness: 0.5,
+      ior: 1.3,
+      clearcoat: 1,
+      clearcoatRoughness: 0.04,
+      envMapIntensity: 1.1,
+      transparent: true,
+      opacity: 0.35,
     });
   }
 
-  // cluster de esferas lisas (mais "líquidas" que um icosaedro facetado)
+  // cluster de esferas lisas, pequenas e quase transparentes (mais "líquidas" que um icosaedro facetado)
   const ORB_CONFIGS = [
-    { radius: 0.95, pos: [1.5, 0.5, -0.6],   tint: 0, speed: 1 },
-    { radius: 0.6,  pos: [-1.7, -0.6, -0.3], tint: 1, speed: 0.75 },
-    { radius: 0.4,  pos: [-1.2, 1.0, 0.2],   tint: 2, speed: 1.25 },
-    { radius: 0.5,  pos: [1.9, -0.9, -0.5],  tint: 1, speed: 0.9 },
-    { radius: 0.3,  pos: [0.1, 1.6, -0.8],   tint: 2, speed: 1.1 },
+    { radius: 0.55, pos: [1.5, 0.5, -0.6],   tint: 0, speed: 1 },
+    { radius: 0.36, pos: [-1.7, -0.6, -0.3], tint: 1, speed: 0.75 },
+    { radius: 0.24, pos: [-1.2, 1.0, 0.2],   tint: 2, speed: 1.25 },
+    { radius: 0.3,  pos: [1.9, -0.9, -0.5],  tint: 1, speed: 0.9 },
+    { radius: 0.18, pos: [0.1, 1.6, -0.8],   tint: 2, speed: 1.1 },
   ];
 
   const orbs = ORB_CONFIGS.map((cfg) => {
@@ -123,7 +128,7 @@ if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       mesh.position.x = cfg.pos[0] + mouseX * 0.12;
 
       // wobble orgânico (squash/stretch) — dá a leitura de "líquido", sem custo de vértice
-      const wobble = 0.08 + Math.min(Math.abs(scrollVelocity), 0.6) * 0.1;
+      const wobble = 0.14 + Math.min(Math.abs(scrollVelocity), 0.6) * 0.16;
       mesh.scale.set(
         1 + Math.sin(phase * 0.9) * wobble,
         1 + Math.sin(phase * 0.9 + 2.1) * wobble,
