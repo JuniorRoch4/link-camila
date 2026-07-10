@@ -1,45 +1,60 @@
 // ===================================================
-// ESFERA 3D ANIMADA — elemento de assinatura do hero
-// A logo (.hero__orb-stage, que contém foto + nome) se move
-// em sincronia com a esfera via CSS custom properties.
+// ESFERAS 3D ANIMADAS — cluster de vidro para dar profundidade ao hero.
+// Uma das esferas ("logoOrb") carrega o nome dela fixo: a cada frame,
+// projetamos sua posição 3D para coordenadas de tela e movemos o
+// elemento .hero__logo para lá, então o texto "gruda" na esfera.
 // ===================================================
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 
 const canvas = document.getElementById('orb-canvas');
-const stage = document.querySelector('.hero__orb-stage');
+const logoEl = document.querySelector('.hero__logo');
 
 if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 4.6;
+  camera.position.z = 4.8;
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  // Geometria: icosaedro suavizado, para leveza (sem MeshTransmission pesado)
-  const geometry = new THREE.IcosahedronGeometry(1.5, 6);
+  const TINTS = [0xC9A6FF, 0xFF8FB3, 0xFFCB80];
 
-  // Material perolado: simula vidro/cromado tingido no gradiente violeta/rosa da marca
-  const material = new THREE.MeshPhysicalMaterial({
-    color: 0xC9A6FF,
-    metalness: 0.15,
-    roughness: 0.12,
-    transmission: 0.85,
-    thickness: 1.2,
-    iridescence: 1,
-    iridescenceIOR: 1.3,
-    iridescenceThicknessRange: [100, 400],
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-    envMapIntensity: 1.4,
+  function makeMaterial(colorHex) {
+    return new THREE.MeshPhysicalMaterial({
+      color: colorHex,
+      metalness: 0.15,
+      roughness: 0.12,
+      transmission: 0.85,
+      thickness: 1.2,
+      iridescence: 1,
+      iridescenceIOR: 1.3,
+      iridescenceThicknessRange: [100, 400],
+      clearcoat: 1,
+      clearcoatRoughness: 0.1,
+      envMapIntensity: 1.4,
+    });
+  }
+
+  // cluster de esferas: a primeira (maior, mais à frente) carrega a logo
+  const ORB_CONFIGS = [
+    { radius: 0.85, pos: [1.05, 0.15, 0.4],  tint: 0, speed: 1,    isLogo: true },
+    { radius: 0.5,  pos: [-1.6, 0.55, -0.6], tint: 1, speed: 0.7 },
+    { radius: 0.32, pos: [-0.75, -0.9, 0.5], tint: 2, speed: 1.3 },
+    { radius: 0.42, pos: [1.85, -0.75, -0.9],tint: 1, speed: 0.85 },
+    { radius: 0.26, pos: [0.15, 1.3, -1.1],  tint: 0, speed: 1.1 },
+  ];
+
+  const orbs = ORB_CONFIGS.map((cfg) => {
+    const geometry = new THREE.IcosahedronGeometry(cfg.radius, 5);
+    const mesh = new THREE.Mesh(geometry, makeMaterial(TINTS[cfg.tint]));
+    mesh.position.set(...cfg.pos);
+    scene.add(mesh);
+    return { mesh, cfg };
   });
 
-  const orb = new THREE.Mesh(geometry, material);
-  orb.position.set(0, 0.05, 0);
-  scene.add(orb);
+  const logoOrb = orbs.find((o) => o.cfg.isLogo) || orbs[0];
 
-  // Luzes no tom da marca (rosa + violeta) para dar volume ao vidro
   const keyLight = new THREE.PointLight(0xFF3D77, 8, 20);
   keyLight.position.set(3, 3, 3);
   scene.add(keyLight);
@@ -65,18 +80,26 @@ if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   window.addEventListener('resize', resize);
 
   const clock = new THREE.Clock();
+  const projected = new THREE.Vector3();
 
   function animate() {
     const t = clock.getElapsedTime();
 
-    orb.rotation.y = t * 0.15 + mouseX * 0.3;
-    orb.rotation.x = Math.sin(t * 0.2) * 0.15 + mouseY * 0.15;
-    orb.position.y = 0.05 + Math.sin(t * 0.6) * 0.12;
+    orbs.forEach(({ mesh, cfg }, i) => {
+      const phase = t * cfg.speed + i * 1.7;
+      mesh.rotation.y = phase * 0.15 + mouseX * 0.25;
+      mesh.rotation.x = Math.sin(phase * 0.2) * 0.15 + mouseY * 0.12;
+      mesh.position.y = cfg.pos[1] + Math.sin(phase * 0.6) * 0.14;
+      mesh.position.x = cfg.pos[0] + mouseX * 0.08;
+    });
 
-    // sincroniza a foto + nome (filhos de .hero__orb-stage) com o movimento da esfera
-    if (stage) {
-      stage.style.setProperty('--orb-x', `${mouseX * 14}px`);
-      stage.style.setProperty('--orb-y', `${Math.sin(t * 0.6) * 10 + mouseY * 8}px`);
+    // gruda o nome na esfera "logo": projeta a posição 3D dela para pixels de tela
+    if (logoEl) {
+      logoOrb.mesh.updateWorldMatrix(true, false);
+      projected.setFromMatrixPosition(logoOrb.mesh.matrixWorld).project(camera);
+      const x = (projected.x * 0.5 + 0.5) * window.innerWidth;
+      const y = (-projected.y * 0.5 + 0.5) * window.innerHeight;
+      logoEl.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
     }
 
     renderer.render(scene, camera);

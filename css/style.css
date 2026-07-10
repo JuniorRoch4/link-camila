@@ -130,6 +130,7 @@ img, video { max-width: 100%; display: block; }
   position: relative;
   min-height: 100svh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: radial-gradient(120% 120% at 50% 0%, #241a35 0%, var(--color-void) 55%, #0a0710 100%);
@@ -146,52 +147,19 @@ img, video { max-width: 100%; display: block; }
   z-index: 1;
 }
 
-.hero__stage {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-md);
-  max-width: 640px;
-}
-
-.hero__orb-stage {
-  position: relative;
-  width: min(58vw, 340px);
-  aspect-ratio: 1 / 1;
-  margin-top: var(--space-sm);
-  transform: translate(var(--orb-x, 0px), var(--orb-y, 0px));
-  will-change: transform;
-}
-
-.hero__photo-ring {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  padding: 5px;
-  background: var(--gradient-primary);
-  box-shadow: 0 0 60px -10px rgba(255,61,119,0.45), 0 0 100px -20px rgba(124,58,237,0.4);
-}
-
-.hero__photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: top center;
-}
-
+/* nome fixo, sincronizado via JS (orb.js) com a esfera "logo".
+   left/top ficam em 0 porque o JS já calcula a posição em pixels
+   absolutos via transform a cada frame. */
 .hero__logo {
   position: absolute;
-  left: 50%;
-  bottom: -12%;
-  transform: translateX(-50%);
+  left: 0;
+  top: 0;
+  transform: translate3d(70vw, 42vh, 0) translate(-50%, -50%);
+  z-index: 2;
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-size: clamp(1rem, 2.6vw, 1.5rem);
   line-height: 1.1;
   white-space: nowrap;
   background: var(--gradient-warm);
@@ -199,32 +167,96 @@ img, video { max-width: 100%; display: block; }
   background-clip: text;
   color: transparent;
   letter-spacing: 0.01em;
-  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.45));
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.5));
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero__stage {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  max-width: 1080px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.hero__intro {
+  flex: 1 1 380px;
+  max-width: 460px;
+  text-align: left;
+}
+
+.hero__badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: var(--space-sm) 0;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+}
+
+.hero__visual {
+  flex: 0 1 320px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__photo-box {
+  width: min(70vw, 300px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  background: var(--gradient-primary);
+  box-shadow: 0 30px 70px -20px rgba(255,61,119,0.4), 0 20px 60px -20px rgba(124,58,237,0.35);
+}
+
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .hero__tagline {
   font-size: 1.1rem;
   line-height: 1.6;
   color: rgba(255,255,255,0.82);
-  max-width: 460px;
-  margin: 0 auto;
   font-weight: 300;
+  margin-bottom: var(--space-md);
 }
 
 .hero__ctas {
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
-  justify-content: center;
 }
 
-@media (max-width: 480px) {
-  .hero__logo { white-space: normal; text-align: center; width: 220px; }
+@media (max-width: 760px) {
+  .hero__stage { text-align: center; }
+  .hero__intro { text-align: center; }
+  .hero__badges { justify-content: center; }
 }
 
 .scroll-cue {
+  position: relative;
+  z-index: 3;
   display: inline-flex;
-  margin-top: var(--space-sm);
+  margin-top: var(--space-lg);
   width: 26px;
   height: 42px;
   border: 1px solid rgba(255,255,255,0.4);
@@ -250,7 +282,7 @@ img, video { max-width: 100%; display: block; }
 /* ===================================================
    SHARED SECTION LAYOUT
 =================================================== */
-.stats, .about, .portfolio, .brands, .testimonials, .services, .faq {
+.stats, .about, .skills, .portfolio, .brands, .testimonials, .services, .faq {
   padding: var(--space-xl) var(--space-md);
   max-width: 1100px;
   margin: 0 auto;
@@ -307,6 +339,43 @@ img, video { max-width: 100%; display: block; }
   line-height: 1.7;
   color: var(--color-ink-soft);
   font-weight: 300;
+}
+
+/* ===================================================
+   COMPETÊNCIAS
+=================================================== */
+.skills {
+  text-align: center;
+}
+
+.skills__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.skills__tools-label {
+  margin: var(--space-md) 0 var(--space-sm);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-taupe);
+}
+
+.chip {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--gradient-primary);
+  color: #fff;
+}
+
+.chip--ghost {
+  background: transparent;
+  color: var(--color-ink-soft);
+  border: 1px solid rgba(0,0,0,0.15);
 }
 
 /* ===================================================
