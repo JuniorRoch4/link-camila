@@ -385,7 +385,7 @@ img, video { max-width: 100%; display: block; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-sm);
   max-width: 480px;
-  margin: var(--space-md) auto var(--space-md);
+  margin: 0 auto var(--space-md);
 }
 
 .stat-card {
