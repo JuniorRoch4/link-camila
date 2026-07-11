@@ -31,8 +31,8 @@
   /* cor base do brilho atrás dos cards no hover */
   --glow: 91, 31, 43;
 
-  --font-display: 'Fraunces', serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Jost', -apple-system, sans-serif;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
