@@ -5,6 +5,7 @@
   /* paleta de marca: vinho + rosé pastel + neutros quentes
      (lembra marcas premium de moda, cosméticos e joalherias) */
   --color-void:       #1C0A0F;
+  --color-void-rgb:   28, 10, 15;
   --color-void-2:     #3D141C;
   --color-base:       #F8F6F4;
   --color-base-dark:  #EFE9E6;
@@ -14,6 +15,7 @@
 
   --grad-violet:     #5B1F2B;
   --grad-violet-deep:#3D141C;
+  --grad-violet-rgb: 91, 31, 43;
   --grad-pink:       #E8C4CF;
   --grad-pink-pale:  #F6E4E9;
   --grad-pink-rgb:   232, 196, 207;
@@ -503,20 +505,16 @@ img, video { max-width: 100%; display: block; }
     linear-gradient(160deg, var(--grad-violet) 0%, var(--grad-violet-deep) 55%, var(--color-void) 100%);
   border: 1.5px solid rgba(var(--grad-pink-rgb), 0.35);
   box-shadow:
-    8px 14px 24px -10px rgba(0,0,0,0.35),
-    0 40px 70px -25px rgba(0,0,0,0.5),
+    14px 20px 0 -6px rgba(var(--grad-violet-rgb), 0.9),
+    0 40px 70px -25px rgba(var(--color-void-rgb), 0.55),
     0 0 0 1px rgba(255,255,255,0.06);
   transform: rotateX(4deg) rotateY(-4deg);
   transform-style: preserve-3d;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transition: transform 0.4s var(--ease);
 }
 
 .about__card:hover {
   transform: rotateX(1deg) rotateY(-1deg) translateY(-4px);
-  box-shadow:
-    4px 8px 16px -8px rgba(0,0,0,0.3),
-    0 50px 80px -25px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(255,255,255,0.08);
 }
 
 .about__text {
