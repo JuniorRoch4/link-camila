@@ -403,15 +403,23 @@ img, video { max-width: 100%; display: block; }
   box-shadow: 0 20px 45px -20px rgba(0,0,0,0.6);
 }
 
+.stat-card__icon {
+  display: block;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+
 .stat-card__value {
   display: block;
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 3.6vw, 1.6rem);
   background: var(--gradient-warm);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .stat-card__label {
