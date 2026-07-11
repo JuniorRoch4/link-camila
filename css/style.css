@@ -154,14 +154,6 @@ img, video { max-width: 100%; display: block; }
   padding: var(--space-lg) var(--space-md);
 }
 
-#orb-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
 .hero__stage {
   position: relative;
   z-index: 3;
@@ -172,9 +164,6 @@ img, video { max-width: 100%; display: block; }
   gap: var(--space-sm);
   max-width: 560px;
   width: 100%;
-  /* flutua suavemente em sincronia com o cluster de esferas (ver orb.js) */
-  transform: translate(var(--orb-x, 0px), var(--orb-y, 0px));
-  will-change: transform;
 }
 
 /* entrada do hero ao carregar a página: sobe de baixo pra cima, em cascata */
@@ -257,33 +246,6 @@ img, video { max-width: 100%; display: block; }
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 0.25rem;
-}
-
-.scroll-cue {
-  position: relative;
-  z-index: 3;
-  display: inline-flex;
-  margin-top: var(--space-lg);
-  width: 26px;
-  height: 42px;
-  border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 20px;
-  justify-content: center;
-  padding-top: 8px;
-}
-
-.scroll-cue span {
-  width: 4px;
-  height: 8px;
-  border-radius: 2px;
-  background: var(--grad-pink);
-  animation: scrollDown 1.6s ease infinite;
-}
-
-@keyframes scrollDown {
-  0% { transform: translateY(0); opacity: 1; }
-  70% { transform: translateY(10px); opacity: 0; }
-  100% { opacity: 0; }
 }
 
 /* ===================================================

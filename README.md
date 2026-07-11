@@ -5,8 +5,7 @@
 site-criadora/
 ├── index.html          → estrutura da página (uma página só)
 ├── css/style.css        → todos os tokens de design (cores, fontes, espaçamentos)
-├── js/orb.js             → esfera 3D animada do hero (Three.js via CDN, sem build)
-├── js/script.js          → animação de scroll do portfólio
+├── js/script.js          → reveal de scroll, botão flutuante, tilt 3D da foto
 └── assets/               → colocar fotos/vídeos reais aqui
 ```
 
@@ -34,7 +33,5 @@ npx serve .
 **Alternativa:** Netlify (mesmo processo, drag-and-drop da pasta também funciona)
 
 ## Notas técnicas
-- A esfera 3D (`orb.js`) usa Three.js direto de CDN via ES module — sem npm, sem build step
-- Respeita `prefers-reduced-motion`: a esfera não renderiza se o usuário tiver essa preferência ativada
 - Grid do portfólio é responsivo (auto-fit), funciona de mobile a desktop sem breakpoints extras
 - Tudo vanilla HTML/CSS/JS — mesmo padrão do projeto Zionn, fácil de manter
