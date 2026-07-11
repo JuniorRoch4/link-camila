@@ -347,7 +347,7 @@ img, video { max-width: 100%; display: block; }
 /* ===================================================
    SHARED SECTION LAYOUT
 =================================================== */
-.stats, .about, .portfolio, .brands, .testimonials, .services, .faq {
+.stats, .about, .portfolio, .testimonials, .faq {
   padding: var(--space-xl) var(--space-md);
   max-width: 1100px;
   margin: 0 auto;
@@ -614,37 +614,6 @@ img, video { max-width: 100%; display: block; }
 }
 
 /* ===================================================
-   MARCAS PARCEIRAS
-=================================================== */
-.brands {
-  text-align: center;
-}
-
-.brands__label {
-  font-size: 0.85rem;
-  color: var(--color-taupe);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--space-md);
-}
-
-.brands__row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-  justify-content: center;
-  align-items: center;
-}
-
-.brand-chip {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--color-ink-soft);
-  opacity: 0.55;
-  filter: grayscale(1);
-}
-
-/* ===================================================
    DEPOIMENTOS
 =================================================== */
 .testimonials {
@@ -697,74 +666,6 @@ img, video { max-width: 100%; display: block; }
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--color-ink);
-}
-
-/* ===================================================
-   SERVIÇOS
-=================================================== */
-.services {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-}
-
-.services::before {
-  content: '';
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(var(--grad-pink-rgb),0.55), transparent 70%);
-  top: -160px;
-  left: -160px;
-  filter: blur(6px);
-  pointer-events: none;
-}
-
-.services__grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-md);
-  text-align: left;
-}
-
-.service-card {
-  padding: var(--space-md) var(--space-sm);
-  background: #fff;
-  border-top: 3px solid var(--grad-pink);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 20px 40px -28px rgba(22,18,28,0.15);
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-top-color 0.35s var(--ease);
-}
-
-.service-card:hover, .service-card:active {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 50px -30px rgba(var(--glow),0.4);
-  border-top-color: var(--grad-violet);
-}
-
-.service-card__num {
-  font-family: var(--font-display);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.service-card h3 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.4rem;
-  margin: var(--space-xs) 0;
-}
-
-.service-card p {
-  color: var(--color-ink-soft);
-  font-size: 0.95rem;
-  font-weight: 300;
 }
 
 /* ===================================================
@@ -1006,7 +907,7 @@ a:focus-visible, button:focus-visible {
     --space-lg: 2.5rem;
   }
 
-  .stats, .about, .portfolio, .brands, .testimonials, .services, .faq, .cta {
+  .stats, .about, .portfolio, .testimonials, .faq, .cta {
     padding-left: var(--space-sm);
     padding-right: var(--space-sm);
   }
@@ -1015,7 +916,7 @@ a:focus-visible, button:focus-visible {
 
   .hero__photo-box { width: min(78vw, 260px); }
 
-  .about::before, .services::before {
+  .about::before {
     width: 280px;
     height: 280px;
   }
