@@ -361,16 +361,55 @@ img, video { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.55);
 }
 
+/* vídeo em destaque — ocupa quase a caixa toda, métricas viram um detalhe pequeno abaixo */
+.stats__video {
+  width: min(100%, 380px);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto var(--space-lg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+}
+
+.stats__video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px dashed rgba(255,255,255,0.18);
+  border-radius: var(--radius-lg);
+}
+
+.stats__video-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .stats__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: var(--space-md);
-  max-width: 900px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+  max-width: 480px;
   margin: 0 auto;
 }
 
 .stat-card {
-  padding: var(--space-md) var(--space-sm);
+  padding: var(--space-sm) var(--space-xs);
   border-radius: var(--radius-lg);
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12);
@@ -387,7 +426,7 @@ img, video { max-width: 100%; display: block; }
 .stat-card__value {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
   background: var(--gradient-warm);
   -webkit-background-clip: text;
   background-clip: text;
@@ -397,11 +436,12 @@ img, video { max-width: 100%; display: block; }
 
 .stat-card__label {
   display: block;
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  font-size: 0.62rem;
   color: rgba(255,255,255,0.75);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
 }
 
 /* ===================================================
