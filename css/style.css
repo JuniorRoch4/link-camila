@@ -16,6 +16,13 @@
   --grad-pink:       #FF8FC7;
   --grad-pink-pale:  #FFE1F1;
 
+  /* fundo editorial do hero: vinho profundo + manchas orgânicas em rosé pastel */
+  --wine-light:  #4A1129;
+  --wine-mid:    #2A0A18;
+  --wine-black:  #150509;
+  --rose-stain:  246, 201, 218;
+  --rose-stain-deep: 233, 168, 196;
+
   --gradient-primary: linear-gradient(135deg, var(--grad-violet), var(--grad-pink));
   --gradient-warm:     linear-gradient(135deg, var(--grad-pink), var(--grad-pink-pale));
   /* degradê puxando para bem claro — usado em faixas/fundos */
@@ -174,10 +181,45 @@ img, video { max-width: 100%; display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(120% 120% at 50% 0%, #241a35 0%, var(--color-void) 55%, #0a0710 100%);
+  /* fundo editorial: vinho profundo + manchas orgânicas em rosé pastel, sem cara de "tech" */
+  background:
+    radial-gradient(ellipse 40% 30% at 78% 8%, rgba(255,255,255,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 14% 8%, rgba(var(--rose-stain),0.32) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 46% at 90% 26%, rgba(var(--rose-stain-deep),0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 85% 55% at 50% 112%, rgba(var(--rose-stain),0.16) 0%, transparent 70%),
+    linear-gradient(160deg, var(--wine-light) 0%, var(--wine-mid) 48%, var(--wine-black) 100%);
   color: #fff;
   overflow: hidden;
   padding: clamp(2.5rem, 7vw, 4rem) var(--space-md);
+}
+
+.hero::before {
+  /* leve granulação / textura de papel fino */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.hero::after {
+  /* sombra orgânica suave, tipo folhagem — discreta, sem literalizar a folha */
+  content: '';
+  position: absolute;
+  z-index: 1;
+  width: 560px;
+  height: 560px;
+  left: -130px;
+  bottom: -170px;
+  background:
+    radial-gradient(ellipse 70% 38% at 30% 60%, rgba(0,0,0,0.32) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 30% at 62% 38%, rgba(0,0,0,0.24) 0%, transparent 65%);
+  transform: rotate(-18deg);
+  filter: blur(20px);
+  pointer-events: none;
 }
 
 .hero__stage {
