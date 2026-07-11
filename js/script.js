@@ -57,35 +57,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===================================================
-  // VÍDEOS EM AUTOPLAY (hero + media kit) — reforça em todo aparelho
+  // VÍDEO DO MEDIA KIT — reforça autoplay em todo aparelho
   // (alguns navegadores mobile ignoram o autoplay do HTML
   // sozinho, principalmente em conexão de dados/economia de bateria)
   // ===================================================
-  const autoplayVideos = document.querySelectorAll('video[autoplay]');
+  const statsVideo = document.querySelector('.stats__video-el');
 
-  if (autoplayVideos.length) {
-    const retryOnInteraction = [];
+  if (statsVideo) {
+    statsVideo.muted = true;
+    statsVideo.playsInline = true;
 
-    autoplayVideos.forEach((video) => {
-      video.muted = true;
-      video.playsInline = true;
+    const tryPlay = () => statsVideo.play().catch(() => {});
 
-      const tryPlay = () => video.play().catch(() => {});
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) tryPlay();
+        else statsVideo.pause();
+      });
+    }, { threshold: 0.25 });
+    videoObserver.observe(statsVideo);
 
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) tryPlay();
-          else video.pause();
-        });
-      }, { threshold: 0.25 });
-      videoObserver.observe(video);
-
-      tryPlay();
-      retryOnInteraction.push(tryPlay);
-    });
-
+    tryPlay();
     ['touchstart', 'click', 'scroll'].forEach((evt) => {
-      document.addEventListener(evt, () => retryOnInteraction.forEach((fn) => fn()), { once: true, passive: true });
+      document.addEventListener(evt, tryPlay, { once: true, passive: true });
     });
   }
 });
