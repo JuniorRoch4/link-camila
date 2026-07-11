@@ -796,34 +796,20 @@ img, video { max-width: 100%; display: block; }
    CTA
 =================================================== */
 .cta {
-  position: relative;
-  overflow: hidden;
   text-align: center;
-  padding: var(--space-xl) var(--space-md);
   color: #fff;
+  background: var(--color-void);
 }
 
-.cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('../assets/footer-studio.jpg') center 35% / cover no-repeat;
-  transform: scale(1.06);
+.cta__inner {
+  padding: var(--space-xl) var(--space-md);
 }
 
-.cta::after {
-  /* vinheta em camadas — dá profundidade em vez de um tom plano por cima da foto */
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 75% 65% at 50% 35%, rgba(28,10,15,0.35) 0%, rgba(28,10,15,0.72) 68%, rgba(28,10,15,0.92) 100%),
-    linear-gradient(180deg, rgba(28,10,15,0.5) 0%, rgba(28,10,15,0.6) 50%, rgba(28,10,15,0.88) 100%);
-}
-
-.cta > * {
-  position: relative;
-  z-index: 1;
+.cta__art {
+  /* arte original completa, de ponta a ponta, sem corte nem sombreado por cima */
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .cta__urgency {
@@ -924,33 +910,11 @@ img, video { max-width: 100%; display: block; }
    FOOTER
 =================================================== */
 .footer {
-  position: relative;
-  overflow: hidden;
   text-align: center;
-  padding-top: clamp(3rem, 8vw, 5rem);
-  font-size: 0.8rem;
-}
-
-.footer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('../assets/footer-studio.jpg') center 30% / cover no-repeat;
-}
-
-.footer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(28,10,15,0.55), rgba(28,10,15,0.8));
-}
-
-.footer__bottom {
-  /* mesma cor sólida usada no cabeçalho fixo, pra fechar a página com o mesmo tom */
-  position: relative;
-  z-index: 1;
-  background: var(--color-void);
   padding: var(--space-md);
+  font-size: 0.8rem;
+  /* mesma cor sólida usada no cabeçalho fixo, pra fechar a página com o mesmo tom */
+  background: var(--color-void);
 }
 
 .footer__copy {
