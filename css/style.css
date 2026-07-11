@@ -2,26 +2,21 @@
    DESIGN TOKENS
 =================================================== */
 :root {
-  --color-void:       #0D0A14;
-  --color-void-2:     #1B1428;
-  --color-base:       #FBF7F4;
-  --color-base-dark:  #F3ECE7;
-  --color-ink:        #16121C;
-  --color-ink-soft:   #514A5E;
-  --color-taupe:      #9C8F89;
+  /* paleta de marca: vinho + rosé pastel + neutros quentes
+     (lembra marcas premium de moda, cosméticos e joalherias) */
+  --color-void:       #1C0A0F;
+  --color-void-2:     #3D141C;
+  --color-base:       #F8F6F4;
+  --color-base-dark:  #EFE9E6;
+  --color-ink:        #111111;
+  --color-ink-soft:   #5C4F51;
+  --color-taupe:      #B9B1B3;
 
-  /* gradiente de assinatura da marca: roxo vibrante + rosa pastel */
-  --grad-violet:     #9333EA;
-  --grad-violet-deep:#7B1FD1;
-  --grad-pink:       #FF8FC7;
-  --grad-pink-pale:  #FFE1F1;
-
-  /* fundo editorial do hero: vinho profundo + manchas orgânicas em rosé pastel */
-  --wine-light:  #4A1129;
-  --wine-mid:    #2A0A18;
-  --wine-black:  #150509;
-  --rose-stain:  246, 201, 218;
-  --rose-stain-deep: 233, 168, 196;
+  --grad-violet:     #5B1F2B;
+  --grad-violet-deep:#3D141C;
+  --grad-pink:       #E8C4CF;
+  --grad-pink-pale:  #F6E4E9;
+  --grad-pink-rgb:   232, 196, 207;
 
   --gradient-primary: linear-gradient(135deg, var(--grad-violet), var(--grad-pink));
   --gradient-warm:     linear-gradient(135deg, var(--grad-pink), var(--grad-pink-pale));
@@ -29,12 +24,12 @@
   --gradient-fade:     linear-gradient(180deg, var(--grad-violet) 0%, var(--grad-pink) 55%, var(--grad-pink-pale) 100%);
 
   /* tons pastel derivados do gradiente, usados na faixa de CTA final */
-  --pearl-1: #F3E4FF;
-  --pearl-2: #FFE1F1;
-  --pearl-3: #FFFAFD;
+  --pearl-1: #F3DCE3;
+  --pearl-2: #F8F6F4;
+  --pearl-3: #FFFFFF;
 
   /* cor base do brilho atrás dos cards no hover */
-  --glow: 147, 51, 234;
+  --glow: 91, 31, 43;
 
   --font-display: 'Fraunces', serif;
   --font-body: 'Inter', -apple-system, sans-serif;
@@ -155,7 +150,7 @@ img, video { max-width: 100%; display: block; }
   display: flex;
   justify-content: center;
   padding: 0.85rem var(--space-md);
-  background: rgba(13,10,20,0.55);
+  background: rgba(28,10,15,0.55);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -184,10 +179,10 @@ img, video { max-width: 100%; display: block; }
   /* fundo editorial: vinho profundo + manchas orgânicas em rosé pastel, sem cara de "tech" */
   background:
     radial-gradient(ellipse 40% 30% at 78% 8%, rgba(255,255,255,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 14% 8%, rgba(var(--rose-stain),0.32) 0%, transparent 62%),
-    radial-gradient(ellipse 55% 46% at 90% 26%, rgba(var(--rose-stain-deep),0.20) 0%, transparent 65%),
-    radial-gradient(ellipse 85% 55% at 50% 112%, rgba(var(--rose-stain),0.16) 0%, transparent 70%),
-    linear-gradient(160deg, var(--wine-light) 0%, var(--wine-mid) 48%, var(--wine-black) 100%);
+    radial-gradient(ellipse 60% 50% at 14% 8%, rgba(var(--grad-pink-rgb),0.32) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 46% at 90% 26%, rgba(var(--grad-pink-rgb),0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 85% 55% at 50% 112%, rgba(var(--grad-pink-rgb),0.16) 0%, transparent 70%),
+    linear-gradient(160deg, var(--grad-violet) 0%, var(--grad-violet-deep) 48%, var(--color-void) 100%);
   color: #fff;
   overflow: hidden;
   padding: clamp(2.5rem, 7vw, 4rem) var(--space-md);
@@ -354,7 +349,7 @@ img, video { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(var(--glow),0.55), rgba(13,10,20,0.88) 55%, rgba(13,10,20,0.96));
+    linear-gradient(135deg, rgba(var(--glow),0.55), rgba(28,10,15,0.88) 55%, rgba(28,10,15,0.96));
 }
 
 .stats > * {
@@ -553,7 +548,7 @@ img, video { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 45%, rgba(13,10,20,0.8));
+  background: linear-gradient(180deg, transparent 45%, rgba(28,10,15,0.8));
   opacity: 0;
   transition: opacity 0.4s var(--ease);
 }
@@ -683,7 +678,7 @@ img, video { max-width: 100%; display: block; }
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,225,241,0.55), transparent 70%);
+  background: radial-gradient(circle, rgba(var(--grad-pink-rgb),0.55), transparent 70%);
   top: -160px;
   left: -160px;
   filter: blur(6px);
