@@ -796,9 +796,34 @@ img, video { max-width: 100%; display: block; }
    CTA
 =================================================== */
 .cta {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   padding: var(--space-xl) var(--space-md);
-  background: linear-gradient(135deg, var(--pearl-1), var(--pearl-2) 50%, var(--pearl-3));
+  color: #fff;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/footer-studio.jpg') center 35% / cover no-repeat;
+  transform: scale(1.06);
+}
+
+.cta::after {
+  /* vinheta em camadas — dá profundidade em vez de um tom plano por cima da foto */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 75% 65% at 50% 35%, rgba(28,10,15,0.35) 0%, rgba(28,10,15,0.72) 68%, rgba(28,10,15,0.92) 100%),
+    linear-gradient(180deg, rgba(28,10,15,0.5) 0%, rgba(28,10,15,0.6) 50%, rgba(28,10,15,0.88) 100%);
+}
+
+.cta > * {
+  position: relative;
+  z-index: 1;
 }
 
 .cta__urgency {
@@ -806,7 +831,7 @@ img, video { max-width: 100%; display: block; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--grad-violet-deep);
+  color: var(--grad-pink);
   margin-bottom: var(--space-sm);
 }
 
@@ -815,7 +840,7 @@ img, video { max-width: 100%; display: block; }
   font-weight: 400;
   font-size: clamp(2rem, 6vw, 3.5rem);
   margin-bottom: var(--space-md);
-  color: var(--color-ink);
+  color: #fff;
 }
 
 .cta__buttons {
