@@ -299,8 +299,8 @@ img, video { max-width: 100%; display: block; }
   transform: rotateX(6deg) rotateY(-10deg);
   transform-style: preserve-3d;
   box-shadow:
-    16px 22px 0 -4px rgba(0,0,0,0.4),
-    0 40px 70px -20px rgba(0,0,0,0.6),
+    8px 14px 24px -10px rgba(0,0,0,0.35),
+    0 40px 70px -20px rgba(0,0,0,0.5),
     0 0 0 1px rgba(255,255,255,0.08);
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
   will-change: transform;
