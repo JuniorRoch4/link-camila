@@ -326,11 +326,12 @@ img, video { max-width: 100%; display: block; }
 .stats {
   position: relative;
   overflow: hidden;
-  /* mesmo gradiente vinho do header/rodapé/CTA, mais claro que o tom parado de antes */
+  /* gradiente vinho iluminando a caixa inteira, sem canto escuro sobrando */
   background: linear-gradient(135deg, var(--grad-violet) 0%, var(--color-void) 100%);
   max-width: none;
   text-align: center;
   color: #fff;
+  padding: var(--space-md) var(--space-md);
 }
 
 .stats::before {
@@ -342,24 +343,20 @@ img, video { max-width: 100%; display: block; }
   background-position: top center;
   filter: blur(22px) saturate(1.2);
   transform: scale(1.15);
-  opacity: 0.2;
+  opacity: 0.15;
 }
 
 .stats::after {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(135deg, rgba(var(--glow),0.35) 0%, rgba(28,10,15,0.6) 55%, rgba(28,10,15,0.78) 100%);
+  /* tom uniforme e leve, só pra unificar com a textura da foto — sem escurecer um lado só */
+  background: rgba(28,10,15,0.3);
 }
 
 .stats > * {
   position: relative;
   z-index: 2;
-}
-
-.stats .section-note {
-  color: rgba(255,255,255,0.55);
 }
 
 /* vídeo em destaque — ocupa quase a caixa toda, métricas viram um detalhe pequeno acima */
@@ -379,6 +376,8 @@ img, video { max-width: 100%; display: block; }
   height: 100%;
   object-fit: cover;
   display: block;
+  /* zoom sutil pra cortar a margem preta da lateral do vídeo original */
+  transform: scale(1.12);
 }
 
 .stats__grid {
