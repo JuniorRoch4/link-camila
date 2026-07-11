@@ -396,6 +396,7 @@ img, video { max-width: 100%; display: block; }
 
 /* vídeo em destaque — ocupa quase a caixa toda, métricas viram um detalhe pequeno acima */
 .stats__video {
+  position: relative;
   width: min(100%, 380px);
   aspect-ratio: 9 / 16;
   margin: 0 auto;
@@ -404,6 +405,16 @@ img, video { max-width: 100%; display: block; }
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+}
+
+.stats__video::after {
+  /* ilumina a base do card, suavizando a transição para o fundo claro da seção Sobre */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(248,246,244,0.85) 0%, rgba(248,246,244,0.35) 18%, transparent 45%);
+  pointer-events: none;
 }
 
 .stats__video-el {
@@ -474,6 +485,7 @@ img, video { max-width: 100%; display: block; }
   position: relative;
   overflow: hidden;
   text-align: center;
+  background: linear-gradient(180deg, var(--color-base) 0%, var(--color-base-dark) 100%);
 }
 
 .about::before {
