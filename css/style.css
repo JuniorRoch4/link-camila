@@ -150,7 +150,7 @@ img, video { max-width: 100%; display: block; }
   display: flex;
   justify-content: center;
   padding: 0.85rem var(--space-md);
-  background: rgba(28,10,15,0.55);
+  background: rgba(0,0,0,0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -218,11 +218,11 @@ img, video { max-width: 100%; display: block; }
 }
 
 .hero__bg-photo {
-  /* preenche a caixa toda, atrás do card da foto principal — sem overlay/sombra por cima */
+  /* mostra a foto inteira, sem cortar, atrás do card da foto principal */
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: url('../assets/hero-tiktok-grid.jpg') center / cover no-repeat;
+  background: url('../assets/hero-tiktok-grid.jpg') center / contain no-repeat;
 }
 
 .hero__bg-photo::after {
@@ -314,11 +314,11 @@ img, video { max-width: 100%; display: block; }
 
 .hero__tagline-btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.4rem 1.25rem;
   border-radius: 999px;
   background: var(--grad-pink);
   color: var(--grad-violet-deep);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   box-shadow: 0 12px 30px -12px rgba(0,0,0,0.5);
 }
