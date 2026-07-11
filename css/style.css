@@ -225,6 +225,14 @@ img, video { max-width: 100%; display: block; }
   background: url('../assets/hero-tiktok-grid.jpg') center / cover no-repeat;
 }
 
+.hero__bg-photo::after {
+  /* scrim só embaixo, pra legenda/botão ficarem legíveis — topo/card da foto seguem sem sombra */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 55%, rgba(28,10,15,0.6) 82%, rgba(28,10,15,0.82) 100%);
+}
+
 .hero__stage {
   position: relative;
   z-index: 3;
@@ -286,12 +294,13 @@ img, video { max-width: 100%; display: block; }
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-void-2);
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1.5px solid rgba(var(--grad-pink-rgb), 0.5);
   transform: rotateX(6deg) rotateY(-10deg);
   transform-style: preserve-3d;
   box-shadow:
     16px 22px 0 -4px rgba(0,0,0,0.4),
-    0 40px 70px -20px rgba(0,0,0,0.6);
+    0 40px 70px -20px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.08);
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
   will-change: transform;
 }
