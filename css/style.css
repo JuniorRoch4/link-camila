@@ -541,6 +541,9 @@ img, video { max-width: 100%; display: block; }
 =================================================== */
 .portfolio {
   text-align: center;
+  color: #fff;
+  /* mesma família vinho do resto do site, degradê da esquerda pra direita */
+  background: linear-gradient(90deg, var(--grad-violet) 0%, var(--color-void) 100%);
 }
 
 /* mobile-first: 2 colunas fixas (sem auto-fit, sem ambiguidade de quebra).
