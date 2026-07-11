@@ -798,7 +798,8 @@ img, video { max-width: 100%; display: block; }
 .cta {
   text-align: center;
   color: #fff;
-  background: var(--color-void);
+  /* gradiente vinho — mesma família de cor do header/rodapé, sem tom sólido parado */
+  background: linear-gradient(135deg, var(--grad-violet) 0%, var(--color-void) 100%);
 }
 
 .cta__inner {
