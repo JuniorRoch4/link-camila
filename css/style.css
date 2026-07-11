@@ -292,7 +292,7 @@ img, video { max-width: 100%; display: block; }
 .hero__photo-box {
   width: min(58vw, 240px);
   aspect-ratio: 1 / 1;
-  border-radius: var(--radius-lg);
+  border-radius: 50%;
   overflow: hidden;
   background: var(--color-void-2);
   border: 1.5px solid rgba(var(--grad-pink-rgb), 0.5);
