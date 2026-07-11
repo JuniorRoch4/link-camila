@@ -4,6 +4,6 @@
 // - uploadPreset: crie em Settings > Upload > Upload presets, modo "Unsigned"
 window.CLOUDINARY_CONFIG = {
   cloudName: 'xzsc2g3k',
-  uploadPreset: 'COLOQUE_O_UPLOAD_PRESET_AQUI',
+  uploadPreset: 'Portfólio Camila',
   tag: 'portfolio',
 };
