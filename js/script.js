@@ -18,6 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===================================================
+  // HEADER — fica transparente assim que a página rola
+  // ===================================================
+  const siteHeader = document.querySelector('.site-header');
+
+  if (siteHeader) {
+    const toggleHeader = () => {
+      siteHeader.classList.toggle('site-header--scrolled', window.scrollY > 10);
+    };
+    toggleHeader();
+    window.addEventListener('scroll', toggleHeader, { passive: true });
+  }
+
+  // ===================================================
   // BOTÃO FLUTUANTE — aparece depois que o hero sai de vista
   // ===================================================
   const floatingCta = document.querySelector('.floating-cta');
