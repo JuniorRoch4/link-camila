@@ -1,0 +1,63 @@
+/* estilos exclusivos da página upload.html (não usada no site público) */
+
+body.upload-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--grad-violet) 0%, var(--grad-violet-deep) 55%, var(--color-void) 100%);
+}
+
+.upload {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+  color: #fff;
+}
+
+.upload__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.9rem;
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.upload__pin-input {
+  display: block;
+  width: 100%;
+  margin: var(--space-md) 0;
+  padding: 0.9rem 1rem;
+  font-size: 1.1rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.upload__pin-input::placeholder { color: rgba(255,255,255,0.4); }
+
+.upload__pin-error {
+  color: var(--grad-pink);
+  font-size: 0.85rem;
+  margin-top: var(--space-xs);
+}
+
+.upload__hint {
+  color: rgba(255,255,255,0.75);
+  margin-bottom: var(--space-md);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.upload__list {
+  list-style: none;
+  margin-top: var(--space-md);
+  text-align: left;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.upload__list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}

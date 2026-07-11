@@ -94,20 +94,8 @@
   <p class="eyebrow">Portfólio</p>
   <h2 class="section-title">Conteúdo recente</h2>
 
-  <div class="portfolio__grid">
-    <div class="portfolio__card reveal reveal--right">
-      <div class="portfolio__media portfolio__media--placeholder">reel 1</div>
-    </div>
-    <div class="portfolio__card reveal">
-      <div class="portfolio__media portfolio__media--placeholder">reel 2</div>
-    </div>
-    <div class="portfolio__card reveal">
-      <div class="portfolio__media portfolio__media--placeholder">reel 3</div>
-    </div>
-    <div class="portfolio__card reveal">
-      <div class="portfolio__media portfolio__media--placeholder">reel 4</div>
-    </div>
-  </div>
+  <div class="portfolio__grid" id="portfolioGrid"></div>
+  <p class="portfolio__empty" id="portfolioEmpty" hidden>Novidades chegando em breve ✨</p>
 </section>
 
 <!-- ========== DEPOIMENTOS ========== -->
@@ -181,6 +169,14 @@
   </svg>
 </a>
 
+<!-- lightbox do portfólio: abre foto/vídeo clicado em tela cheia -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <div class="lightbox__content" id="lightboxContent"></div>
+</div>
+
+<script src="js/cloudinary-config.js"></script>
 <script src="js/script.js"></script>
+<script src="js/portfolio.js"></script>
 </body>
 </html>

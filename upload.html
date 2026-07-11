@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Upload de portfólio | Camila Schausse</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/upload.css">
+</head>
+<body class="upload-page">
+
+<header class="site-header">
+  <h1 class="site-header__name">Camila Schausse</h1>
+</header>
+
+<main class="upload">
+  <div class="upload__pin-gate" id="pinGate">
+    <p class="eyebrow">Área restrita</p>
+    <h2 class="upload__title">Digite o PIN</h2>
+    <input type="password" id="pinInput" inputmode="numeric" placeholder="PIN de acesso" class="upload__pin-input" autocomplete="off">
+    <button class="btn btn--primary-grad" id="pinSubmit">Entrar</button>
+    <p class="upload__pin-error" id="pinError" hidden>PIN incorreto, tenta de novo.</p>
+  </div>
+
+  <div class="upload__widget" id="uploadArea" hidden>
+    <p class="eyebrow">Portfólio</p>
+    <h2 class="upload__title">Adicionar foto ou vídeo</h2>
+    <p class="upload__hint">Escolha da galeria ou grave na hora pela câmera. Assim que o envio terminar, aparece no site automaticamente.</p>
+    <button class="btn btn--primary-grad" id="openWidget">Selecionar arquivo</button>
+    <ul class="upload__list" id="uploadList"></ul>
+  </div>
+</main>
+
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+<script src="js/cloudinary-config.js"></script>
+<script src="js/upload.js"></script>
+</body>
+</html>
