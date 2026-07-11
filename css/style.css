@@ -385,8 +385,11 @@ img, video { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: 0;
-  /* tom uniforme e leve, só pra unificar com a textura da foto — sem escurecer um lado só */
-  background: rgba(28,10,15,0.3);
+  /* tom uniforme e leve, só pra unificar com a textura da foto, com clareamento cinza suave na base
+     pra aproximar o vinho do fundo claro da seção Sobre logo abaixo */
+  background:
+    linear-gradient(180deg, transparent 75%, rgba(248,246,244,0.55) 100%),
+    rgba(28,10,15,0.3);
 }
 
 .stats > * {
@@ -396,7 +399,6 @@ img, video { max-width: 100%; display: block; }
 
 /* vídeo em destaque — ocupa quase a caixa toda, métricas viram um detalhe pequeno acima */
 .stats__video {
-  position: relative;
   width: min(100%, 380px);
   aspect-ratio: 9 / 16;
   margin: 0 auto;
@@ -405,16 +407,6 @@ img, video { max-width: 100%; display: block; }
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
-}
-
-.stats__video::after {
-  /* ilumina a base do card, suavizando a transição para o fundo claro da seção Sobre */
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(0deg, rgba(248,246,244,0.85) 0%, rgba(248,246,244,0.35) 18%, transparent 45%);
-  pointer-events: none;
 }
 
 .stats__video-el {
