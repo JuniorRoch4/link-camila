@@ -275,7 +275,7 @@ img, video { max-width: 100%; display: block; }
 .hero__photo-box {
   width: min(58vw, 240px);
   aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-void-2);
   border: 1px solid rgba(255,255,255,0.14);
@@ -371,7 +371,7 @@ img, video { max-width: 100%; display: block; }
 
 .stat-card {
   padding: var(--space-md) var(--space-sm);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(6px);
@@ -519,7 +519,7 @@ img, video { max-width: 100%; display: block; }
 .portfolio__card {
   position: relative;
   aspect-ratio: 9 / 16;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 20px 40px -28px rgba(22,18,28,0.3);
@@ -624,7 +624,7 @@ img, video { max-width: 100%; display: block; }
 
 .testimonial-card {
   background: #fff;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   padding: var(--space-md);
   box-shadow: 0 20px 40px -24px rgba(22,18,28,0.18);
   position: relative;
@@ -695,16 +695,17 @@ img, video { max-width: 100%; display: block; }
 
 .service-card {
   padding: var(--space-md) var(--space-sm);
-  border-top: 1px solid rgba(0,0,0,0.1);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  background: #fff;
+  border-top: 3px solid var(--grad-pink);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px -28px rgba(22,18,28,0.15);
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-top-color 0.35s var(--ease);
 }
 
 .service-card:hover, .service-card:active {
   transform: translateY(-6px);
   box-shadow: 0 24px 50px -30px rgba(var(--glow),0.4);
-  border-top-color: var(--grad-pink);
-  border-top-width: 2px;
+  border-top-color: var(--grad-violet);
 }
 
 .service-card__num {
@@ -746,7 +747,7 @@ img, video { max-width: 100%; display: block; }
 
 .faq-item {
   border: 1px solid rgba(0,0,0,0.1);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   padding: var(--space-sm) var(--space-md);
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
 }
