@@ -832,10 +832,26 @@ img, video { max-width: 100%; display: block; }
    CTA
 =================================================== */
 .cta {
+  position: relative;
   text-align: center;
   color: #fff;
   /* gradiente vinho — mesma família de cor do header/rodapé, sem tom sólido parado */
   background: linear-gradient(135deg, var(--grad-violet) 0%, var(--color-void) 100%);
+}
+
+.cta::before {
+  /* clareamento cinza suave no topo, aproximando do fundo claro do FAQ logo acima */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(248,246,244,0.55) 0%, transparent 25%);
+  pointer-events: none;
+}
+
+.cta__inner, .cta__art {
+  position: relative;
+  z-index: 1;
 }
 
 .cta__inner {
