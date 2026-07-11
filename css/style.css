@@ -913,8 +913,8 @@ img, video { max-width: 100%; display: block; }
   text-align: center;
   padding: var(--space-md);
   font-size: 0.8rem;
-  /* mesma cor sólida usada no cabeçalho fixo, pra fechar a página com o mesmo tom */
-  background: var(--color-void);
+  /* gradiente vinho — mais claro que um tom sólido parado, mesma família de cor do header */
+  background: linear-gradient(135deg, var(--grad-violet) 0%, var(--color-void) 100%);
 }
 
 .footer__copy {
