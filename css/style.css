@@ -326,7 +326,8 @@ img, video { max-width: 100%; display: block; }
 .stats {
   position: relative;
   overflow: hidden;
-  background: var(--color-void);
+  /* mesmo gradiente vinho do header/rodapé/CTA, mais claro que o tom parado de antes */
+  background: linear-gradient(135deg, var(--grad-violet) 0%, var(--color-void) 100%);
   max-width: none;
   text-align: center;
   color: #fff;
@@ -341,7 +342,7 @@ img, video { max-width: 100%; display: block; }
   background-position: top center;
   filter: blur(22px) saturate(1.2);
   transform: scale(1.15);
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 .stats::after {
@@ -349,7 +350,7 @@ img, video { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(var(--glow),0.55), rgba(28,10,15,0.88) 55%, rgba(28,10,15,0.96));
+    linear-gradient(135deg, rgba(var(--glow),0.35) 0%, rgba(28,10,15,0.6) 55%, rgba(28,10,15,0.78) 100%);
 }
 
 .stats > * {
@@ -361,11 +362,11 @@ img, video { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.55);
 }
 
-/* vídeo em destaque — ocupa quase a caixa toda, métricas viram um detalhe pequeno abaixo */
+/* vídeo em destaque — ocupa quase a caixa toda, métricas viram um detalhe pequeno acima */
 .stats__video {
   width: min(100%, 380px);
   aspect-ratio: 9 / 16;
-  margin: 0 auto var(--space-lg);
+  margin: 0 auto;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: rgba(255,255,255,0.05);
@@ -385,7 +386,7 @@ img, video { max-width: 100%; display: block; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-sm);
   max-width: 480px;
-  margin: 0 auto;
+  margin: var(--space-md) auto var(--space-md);
 }
 
 .stat-card {
