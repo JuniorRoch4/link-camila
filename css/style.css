@@ -902,7 +902,7 @@ img, video { max-width: 100%; display: block; }
   position: relative;
   overflow: hidden;
   text-align: center;
-  padding: var(--space-lg) var(--space-md);
+  padding-top: clamp(3rem, 8vw, 5rem);
   font-size: 0.8rem;
 }
 
@@ -917,13 +917,15 @@ img, video { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(28,10,15,0.8), rgba(28,10,15,0.92));
+  background: linear-gradient(180deg, rgba(28,10,15,0.55), rgba(28,10,15,0.8));
 }
 
-.footer__copy,
-.footer__credit {
+.footer__bottom {
+  /* mesma cor sólida usada no cabeçalho fixo, pra fechar a página com o mesmo tom */
   position: relative;
   z-index: 1;
+  background: var(--color-void);
+  padding: var(--space-md);
 }
 
 .footer__copy {
