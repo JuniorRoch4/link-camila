@@ -373,31 +373,11 @@ img, video { max-width: 100%; display: block; }
   box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
 }
 
-.stats__video-placeholder {
+.stats__video-el {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  color: rgba(255,255,255,0.55);
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border: 1px dashed rgba(255,255,255,0.18);
-  border-radius: var(--radius-lg);
-}
-
-.stats__video-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--gradient-primary);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  display: block;
 }
 
 .stats__grid {
