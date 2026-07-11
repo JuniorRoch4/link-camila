@@ -3,7 +3,7 @@
 // - cloudName: fica no topo do painel da Cloudinary ("Cloud name")
 // - uploadPreset: crie em Settings > Upload > Upload presets, modo "Unsigned"
 window.CLOUDINARY_CONFIG = {
-  cloudName: 'COLOQUE_O_CLOUD_NAME_AQUI',
+  cloudName: 'xzsc2g3k',
   uploadPreset: 'COLOQUE_O_UPLOAD_PRESET_AQUI',
   tag: 'portfolio',
 };
