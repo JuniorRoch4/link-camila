@@ -899,10 +899,52 @@ img, video { max-width: 100%; display: block; }
    FOOTER
 =================================================== */
 .footer {
+  position: relative;
+  overflow: hidden;
   text-align: center;
-  padding: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
   font-size: 0.8rem;
-  color: var(--color-taupe);
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/footer-studio.jpg') center 30% / cover no-repeat;
+}
+
+.footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28,10,15,0.8), rgba(28,10,15,0.92));
+}
+
+.footer__copy,
+.footer__credit {
+  position: relative;
+  z-index: 1;
+}
+
+.footer__copy {
+  color: rgba(255,255,255,0.85);
+}
+
+.footer__credit {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.footer__credit a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s var(--ease);
+}
+
+.footer__credit a:hover {
+  color: var(--grad-pink);
 }
 
 /* Focus visibility for keyboard nav */
