@@ -217,6 +217,14 @@ img, video { max-width: 100%; display: block; }
   pointer-events: none;
 }
 
+.hero__bg-photo {
+  /* preenche a caixa toda, atrás do card da foto principal — sem overlay/sombra por cima */
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: url('../assets/hero-tiktok-grid.jpg') center / cover no-repeat;
+}
+
 .hero__stage {
   position: relative;
   z-index: 3;
