@@ -55,4 +55,31 @@ document.addEventListener('DOMContentLoaded', () => {
     photoCard.addEventListener('pointerleave', resetTilt);
     photoCard.addEventListener('pointerup', resetTilt);
   }
+
+  // ===================================================
+  // VÍDEO DO MEDIA KIT — reforça autoplay em todo aparelho
+  // (alguns navegadores mobile ignoram o autoplay do HTML
+  // sozinho, principalmente em conexão de dados/economia de bateria)
+  // ===================================================
+  const statsVideo = document.querySelector('.stats__video-el');
+
+  if (statsVideo) {
+    statsVideo.muted = true;
+    statsVideo.playsInline = true;
+
+    const tryPlay = () => statsVideo.play().catch(() => {});
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) tryPlay();
+        else statsVideo.pause();
+      });
+    }, { threshold: 0.25 });
+    videoObserver.observe(statsVideo);
+
+    tryPlay();
+    ['touchstart', 'click', 'scroll'].forEach((evt) => {
+      document.addEventListener(evt, tryPlay, { once: true, passive: true });
+    });
+  }
 });
