@@ -1,12 +1,12 @@
 // ===================================================
-// PÁGINA DE UPLOAD — PIN simples de acesso + widget da
-// Cloudinary. O PIN só barra visitantes casuais (fica
-// visível no código-fonte pra quem procurar); não é
-// segurança de verdade, só um filtro rápido.
+// PÁGINA DE UPLOAD — PIN de acesso + widget da Cloudinary.
+// O PIN é conferido no servidor (api/verify-pin.js) contra a
+// variável de ambiente UPLOAD_PIN, então nunca aparece no
+// código que o navegador baixa. Ainda não é segurança de
+// verdade (é só um filtro contra visitante casual), mas o
+// valor em si fica fora do alcance de quem olhar o código.
 // ===================================================
 document.addEventListener('DOMContentLoaded', () => {
-  const PIN = '2026camila'; // <- troque aqui pra mudar o PIN de acesso
-
   const pinGate = document.getElementById('pinGate');
   const uploadArea = document.getElementById('uploadArea');
   const pinInput = document.getElementById('pinInput');
@@ -23,13 +23,30 @@ document.addEventListener('DOMContentLoaded', () => {
     unlock();
   }
 
-  const tryUnlock = () => {
-    if (pinInput.value === PIN) {
-      unlock();
-    } else {
+  const tryUnlock = async () => {
+    if (!pinInput.value) return;
+    pinSubmit.disabled = true;
+    pinError.hidden = true;
+
+    try {
+      const res = await fetch('/api/verify-pin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin: pinInput.value }),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        unlock();
+      } else {
+        pinError.hidden = false;
+        pinInput.value = '';
+        pinInput.focus();
+      }
+    } catch (e) {
       pinError.hidden = false;
-      pinInput.value = '';
-      pinInput.focus();
+    } finally {
+      pinSubmit.disabled = false;
     }
   };
 
