@@ -759,13 +759,25 @@ img, video { max-width: 100%; display: block; }
 
 .faq-item summary {
   cursor: pointer;
-  font-weight: 500;
-  font-size: 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
+  background: linear-gradient(135deg, var(--grad-violet-deep) 0%, var(--grad-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-sm);
+  transition: filter 0.3s var(--ease);
+}
+
+.faq-item:hover summary,
+.faq-item[open] summary {
+  filter: brightness(1.15);
 }
 
 .faq-item summary::-webkit-details-marker { display: none; }
