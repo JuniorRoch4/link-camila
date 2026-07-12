@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Portfólio completo | Camila Schausse</title>
+<meta name="description" content="Portfólio completo de vídeos e fotos de Camila Schausse — live commerce, TikTok e conteúdo de e-commerce.">
+<meta name="robots" content="noindex, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1 class="site-header__name">Camila Schausse</h1>
+</header>
+
+<section class="portfolio" id="portfolio">
+  <p class="eyebrow">Portfólio</p>
+  <h2 class="section-title">Portfólio completo</h2>
+
+  <div class="portfolio__grid" id="portfolioGrid"></div>
+  <p class="portfolio__empty" id="portfolioEmpty" hidden>Novidades chegando em breve ✨</p>
+
+  <a href="index.html" class="btn btn--ghost-light portfolio__cta">← Voltar ao início</a>
+</section>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <div class="lightbox__content" id="lightboxContent"></div>
+</div>
+
+<script src="js/cloudinary-config.js"></script>
+<script src="js/portfolio.js"></script>
+</body>
+</html>

@@ -73,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     grid.innerHTML = '';
 
-    items.forEach((res, i) => {
+    const limit = grid.dataset.limit ? parseInt(grid.dataset.limit, 10) : null;
+    const visibleItems = limit ? items.slice(0, limit) : items;
+
+    visibleItems.forEach((res, i) => {
       const isVideo = res.resourceType === 'video';
       const url = `https://res.cloudinary.com/${cloudName}/${res.resourceType}/upload/${res.public_id}.${res.format}`;
       const thumb = isVideo
