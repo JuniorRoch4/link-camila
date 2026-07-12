@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const limit = grid.dataset.limit ? parseInt(grid.dataset.limit, 10) : null;
       const visibleItems = limit ? items.slice(0, limit) : items;
 
+      const playableVideos = [];
+
       visibleItems.forEach((item, i) => {
         const isVideo = item.resourceType === 'video';
         const url = `https://res.cloudinary.com/${cloudName}/${item.resourceType}/upload/${item.public_id}.${item.format}`;
@@ -79,18 +81,30 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = `portfolio__card reveal${i % 2 === 0 ? ' reveal--right' : ''}`;
         card.dataset.type = isVideo ? 'video' : 'image';
 
-        const img = document.createElement('img');
-        img.className = 'portfolio__media';
-        img.src = thumb;
-        img.alt = '';
-        img.loading = 'lazy';
-        card.appendChild(img);
-
         if (isVideo) {
-          const play = document.createElement('span');
-          play.className = 'portfolio__play';
-          play.setAttribute('aria-hidden', 'true');
-          card.appendChild(play);
+          const video = document.createElement('video');
+          video.className = 'portfolio__media';
+          video.src = url;
+          video.poster = thumb;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.preload = 'metadata';
+          card.appendChild(video);
+          playableVideos.push(video);
+
+          const mute = document.createElement('span');
+          mute.className = 'portfolio__mute';
+          mute.setAttribute('aria-hidden', 'true');
+          mute.textContent = '🔇';
+          card.appendChild(mute);
+        } else {
+          const img = document.createElement('img');
+          img.className = 'portfolio__media';
+          img.src = thumb;
+          img.alt = '';
+          img.loading = 'lazy';
+          card.appendChild(img);
         }
 
         card.addEventListener('click', () => openLightbox({ type: isVideo ? 'video' : 'image', url }));
@@ -107,5 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { threshold: 0.15 });
 
       grid.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+      if (playableVideos.length) {
+        const playObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.play().catch(() => {});
+            } else {
+              entry.target.pause();
+            }
+          });
+        }, { threshold: 0.6 });
+
+        playableVideos.forEach((video) => playObserver.observe(video));
+      }
     });
 });

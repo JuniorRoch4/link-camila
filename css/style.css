@@ -552,8 +552,19 @@ img, video { max-width: 100%; display: block; }
   background: linear-gradient(90deg, var(--grad-violet) 0%, var(--color-void) 100%);
 }
 
-/* mobile-first: 2 colunas fixas (sem auto-fit, sem ambiguidade de quebra).
-   O grid "bento" com card em destaque só entra a partir de 640px. */
+.portfolio .section-title {
+  margin-bottom: var(--space-sm);
+}
+
+.portfolio__desc {
+  max-width: 480px;
+  margin: 0 auto var(--space-lg);
+  color: rgba(255,255,255,0.8);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* só as 2 publicações mais recentes — cards verticais estilo Reels/TikTok */
 .portfolio__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -573,15 +584,14 @@ img, video { max-width: 100%; display: block; }
 
 @media (min-width: 640px) {
   .portfolio__grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    grid-auto-rows: 220px;
+    max-width: 620px;
+    margin: 0 auto;
   }
 
-  /* card em destaque: maior, entra pela direita (ver .reveal--right) */
-  .portfolio__card:first-child {
-    grid-column: span 2;
-    grid-row: span 2;
-    aspect-ratio: auto;
+  /* galeria completa: sem limite de coluna, cresce conforme o conteúdo */
+  .portfolio--full .portfolio__grid {
+    max-width: none;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
 
@@ -615,30 +625,20 @@ img, video { max-width: 100%; display: block; }
   transform: scale(1.06);
 }
 
-.portfolio__play {
+.portfolio__mute {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0.6rem;
+  right: 0.6rem;
   z-index: 2;
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
   border-radius: 50%;
   background: rgba(28,10,15,0.55);
   pointer-events: none;
-}
-
-.portfolio__play::before {
-  content: '';
-  width: 0;
-  height: 0;
-  margin-left: 3px;
-  border-style: solid;
-  border-width: 8px 0 8px 13px;
-  border-color: transparent transparent transparent #fff;
 }
 
 .portfolio__empty {
