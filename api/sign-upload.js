@@ -2,10 +2,17 @@
 // Sem essa assinatura o widget não consegue subir nada — fecha o buraco que
 // existia com o preset "unsigned" (que qualquer um podia usar direto, sem PIN).
 const crypto = require('crypto');
+const { safeCompare } = require('./_safe-compare');
+const { isRateLimited } = require('./_rate-limit');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false });
+    return;
+  }
+
+  if (isRateLimited(req)) {
+    res.status(429).json({ ok: false, error: 'Muitas tentativas. Tenta de novo mais tarde.' });
     return;
   }
 
@@ -19,7 +26,7 @@ module.exports = async (req, res) => {
 
   const { pin, paramsToSign } = req.body || {};
 
-  if (typeof pin !== 'string' || pin !== expectedPin) {
+  if (!safeCompare(pin, expectedPin)) {
     res.status(401).json({ ok: false, error: 'PIN inválido.' });
     return;
   }

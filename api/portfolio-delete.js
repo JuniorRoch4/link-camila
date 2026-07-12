@@ -1,11 +1,19 @@
 // Apaga uma foto/vídeo do portfólio direto na Cloudinary. Protegido pelo mesmo
 // PIN da página de upload (variável UPLOAD_PIN) e autenticado com
 // CLOUDINARY_API_KEY/CLOUDINARY_API_SECRET — nada disso fica no código.
+const { safeCompare } = require('./_safe-compare');
+const { isRateLimited } = require('./_rate-limit');
+
 const CLOUD_NAME = 'xzsc2g3k';
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false });
+    return;
+  }
+
+  if (isRateLimited(req)) {
+    res.status(429).json({ ok: false, error: 'Muitas tentativas. Tenta de novo mais tarde.' });
     return;
   }
 
@@ -20,7 +28,7 @@ module.exports = async (req, res) => {
 
   const { pin, resourceType, publicId } = req.body || {};
 
-  if (typeof pin !== 'string' || pin !== expectedPin) {
+  if (!safeCompare(pin, expectedPin)) {
     res.status(401).json({ ok: false, error: 'PIN inválido.' });
     return;
   }
