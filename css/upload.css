@@ -86,3 +86,69 @@ body.upload-page {
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+
+.upload__manage {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.upload__title--sm {
+  font-size: 1.3rem;
+}
+
+.upload__manage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: var(--space-sm);
+}
+
+.upload__manage-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: opacity 0.2s var(--ease);
+}
+
+.upload__manage-card.is-deleting {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.upload__manage-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: rgba(255,255,255,0.08);
+}
+
+.upload__manage-delete {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(28,10,15,0.65);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.upload__manage-delete:hover {
+  background: rgba(28,10,15,0.9);
+  transform: scale(1.08);
+}
+
+.upload__manage-empty {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  margin-top: var(--space-sm);
+}

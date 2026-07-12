@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const unlock = () => {
     pinGate.hidden = true;
     uploadArea.hidden = false;
+    loadManageGrid();
   };
 
   const tryUnlock = async () => {
@@ -63,6 +64,88 @@ document.addEventListener('DOMContentLoaded', () => {
   const config = window.CLOUDINARY_CONFIG;
   const openWidgetBtn = document.getElementById('openWidget');
   const uploadList = document.getElementById('uploadList');
+  const manageGrid = document.getElementById('manageGrid');
+  const manageEmpty = document.getElementById('manageEmpty');
+
+  const loadManageGrid = async () => {
+    if (!manageGrid) return;
+    manageGrid.innerHTML = '';
+    if (manageEmpty) manageEmpty.hidden = true;
+
+    try {
+      const res = await fetch('/api/portfolio-list');
+      const { items } = await res.json();
+
+      if (!items || !items.length) {
+        if (manageEmpty) manageEmpty.hidden = false;
+        return;
+      }
+
+      items.forEach((item) => {
+        const isVideo = item.resourceType === 'video';
+        const thumb = isVideo
+          ? `https://res.cloudinary.com/${config.cloudName}/video/upload/so_1.0/${item.public_id}.jpg`
+          : `https://res.cloudinary.com/${config.cloudName}/image/upload/${item.public_id}.${item.format}`;
+
+        const card = document.createElement('div');
+        card.className = 'upload__manage-card';
+
+        const img = document.createElement('img');
+        img.className = 'upload__manage-media';
+        img.src = thumb;
+        img.alt = '';
+        img.loading = 'lazy';
+        card.appendChild(img);
+
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'upload__manage-delete';
+        del.textContent = '🗑️';
+        del.setAttribute('aria-label', 'Apagar');
+        del.addEventListener('click', () => deleteItem(item, card));
+        card.appendChild(del);
+
+        manageGrid.appendChild(card);
+      });
+    } catch (e) {
+      if (manageEmpty) {
+        manageEmpty.hidden = false;
+        manageEmpty.textContent = 'Não deu pra carregar o conteúdo publicado.';
+      }
+    }
+  };
+
+  const deleteItem = async (item, card) => {
+    if (!confirm('Apagar esse conteúdo do site? Não dá pra desfazer.')) return;
+
+    card.classList.add('is-deleting');
+
+    try {
+      const res = await fetch('/api/portfolio-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pin: pinInput.value,
+          resourceType: item.resourceType,
+          publicId: item.public_id,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        card.remove();
+        if (manageGrid && !manageGrid.children.length && manageEmpty) {
+          manageEmpty.hidden = false;
+        }
+      } else {
+        card.classList.remove('is-deleting');
+        alert('Não deu pra apagar. Tenta de novo.');
+      }
+    } catch (e) {
+      card.classList.remove('is-deleting');
+      alert('Não deu pra apagar. Tenta de novo.');
+    }
+  };
 
   openWidgetBtn.addEventListener('click', () => {
     const isConfigured = config && config.cloudName && !config.cloudName.startsWith('COLOQUE');
@@ -86,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const item = document.createElement('li');
           item.textContent = `✔ Enviado: ${result.info.original_filename}`;
           uploadList.prepend(item);
+          loadManageGrid();
         }
       }
     );
