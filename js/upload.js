@@ -26,12 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const unlock = () => {
     pinGate.hidden = true;
     uploadArea.hidden = false;
-    sessionStorage.setItem('portfolioUploadUnlocked', '1');
   };
-
-  if (sessionStorage.getItem('portfolioUploadUnlocked') === '1') {
-    unlock();
-  }
 
   const tryUnlock = async () => {
     if (!pinInput.value) return;
