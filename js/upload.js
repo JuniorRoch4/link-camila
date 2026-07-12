@@ -158,7 +158,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const widget = cloudinary.createUploadWidget(
       {
         cloudName: config.cloudName,
-        uploadPreset: config.uploadPreset,
+        apiKey: config.apiKey,
+        uploadSignature: (callback, paramsToSign) => {
+          fetch('/api/sign-upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin: pinInput.value, paramsToSign }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.ok) callback(data.signature);
+            });
+        },
         tags: [config.tag],
         sources: ['local', 'camera'],
         multiple: true,

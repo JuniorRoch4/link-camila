@@ -1,9 +1,8 @@
 // Config compartilhada entre a página de upload (upload.html) e o portfólio (index.html).
-// Depois de criar a conta na Cloudinary, preencha os dois valores abaixo:
-// - cloudName: fica no topo do painel da Cloudinary ("Cloud name")
-// - uploadPreset: crie em Settings > Upload > Upload presets, modo "Unsigned"
+// apiKey aqui é a chave pública da Cloudinary (não é segredo, só identifica a conta).
+// O upload é assinado no servidor (api/sign-upload.js) — sem isso ninguém sobe nada.
 window.CLOUDINARY_CONFIG = {
   cloudName: 'xzsc2g3k',
-  uploadPreset: 'Portfólio Camila',
+  apiKey: '284114235818344',
   tag: 'portfolio',
 };
