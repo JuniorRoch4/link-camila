@@ -55,65 +55,57 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === lightbox) closeLightbox();
   });
 
-  const fetchList = (resourceType) =>
-    fetch(`https://res.cloudinary.com/${cloudName}/${resourceType}/list/${tag}.json`)
-      .then((res) => (res.ok ? res.json() : { resources: [] }))
-      .then((data) => (data.resources || []).map((r) => ({ ...r, resourceType })))
-      .catch(() => []);
-
-  Promise.all([fetchList('video'), fetchList('image')]).then(([videos, images]) => {
-    const items = [...videos, ...images].sort(
-      (a, b) => new Date(b.created_at) - new Date(a.created_at)
-    );
-
-    if (!items.length) {
-      if (emptyMsg) emptyMsg.hidden = false;
-      return;
-    }
-
-    grid.innerHTML = '';
-
-    const limit = grid.dataset.limit ? parseInt(grid.dataset.limit, 10) : null;
-    const visibleItems = limit ? items.slice(0, limit) : items;
-
-    visibleItems.forEach((res, i) => {
-      const isVideo = res.resourceType === 'video';
-      const url = `https://res.cloudinary.com/${cloudName}/${res.resourceType}/upload/${res.public_id}.${res.format}`;
-      const thumb = isVideo
-        ? `https://res.cloudinary.com/${cloudName}/video/upload/so_1.0/${res.public_id}.jpg`
-        : url;
-
-      const card = document.createElement('div');
-      card.className = `portfolio__card reveal${i % 2 === 0 ? ' reveal--right' : ''}`;
-      card.dataset.type = isVideo ? 'video' : 'image';
-
-      const img = document.createElement('img');
-      img.className = 'portfolio__media';
-      img.src = thumb;
-      img.alt = '';
-      img.loading = 'lazy';
-      card.appendChild(img);
-
-      if (isVideo) {
-        const play = document.createElement('span');
-        play.className = 'portfolio__play';
-        play.setAttribute('aria-hidden', 'true');
-        card.appendChild(play);
+  fetch('/api/portfolio-list')
+    .then((res) => (res.ok ? res.json() : { items: [] }))
+    .then(({ items }) => {
+      if (!items || !items.length) {
+        if (emptyMsg) emptyMsg.hidden = false;
+        return;
       }
 
-      card.addEventListener('click', () => openLightbox({ type: isVideo ? 'video' : 'image', url }));
-      grid.appendChild(card);
-    });
+      grid.innerHTML = '';
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, idx) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('is-visible'), (idx % 6) * 90);
-          revealObserver.unobserve(entry.target);
+      const limit = grid.dataset.limit ? parseInt(grid.dataset.limit, 10) : null;
+      const visibleItems = limit ? items.slice(0, limit) : items;
+
+      visibleItems.forEach((item, i) => {
+        const isVideo = item.resourceType === 'video';
+        const url = `https://res.cloudinary.com/${cloudName}/${item.resourceType}/upload/${item.public_id}.${item.format}`;
+        const thumb = isVideo
+          ? `https://res.cloudinary.com/${cloudName}/video/upload/so_1.0/${item.public_id}.jpg`
+          : url;
+
+        const card = document.createElement('div');
+        card.className = `portfolio__card reveal${i % 2 === 0 ? ' reveal--right' : ''}`;
+        card.dataset.type = isVideo ? 'video' : 'image';
+
+        const img = document.createElement('img');
+        img.className = 'portfolio__media';
+        img.src = thumb;
+        img.alt = '';
+        img.loading = 'lazy';
+        card.appendChild(img);
+
+        if (isVideo) {
+          const play = document.createElement('span');
+          play.className = 'portfolio__play';
+          play.setAttribute('aria-hidden', 'true');
+          card.appendChild(play);
         }
-      });
-    }, { threshold: 0.15 });
 
-    grid.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
-  });
+        card.addEventListener('click', () => openLightbox({ type: isVideo ? 'video' : 'image', url }));
+        grid.appendChild(card);
+      });
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, idx) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('is-visible'), (idx % 6) * 90);
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      grid.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    });
 });
