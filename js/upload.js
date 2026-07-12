@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const pinInput = document.getElementById('pinInput');
   const pinSubmit = document.getElementById('pinSubmit');
   const pinError = document.getElementById('pinError');
+  const pinToggle = document.getElementById('pinToggle');
+
+  pinToggle?.addEventListener('click', () => {
+    const showing = pinInput.type === 'text';
+    pinInput.type = showing ? 'password' : 'text';
+    pinToggle.textContent = showing ? '👁️' : '🙈';
+    pinToggle.setAttribute('aria-label', showing ? 'Mostrar PIN' : 'Ocultar PIN');
+    pinToggle.setAttribute('aria-pressed', showing ? 'false' : 'true');
+    pinInput.focus();
+  });
 
   const unlock = () => {
     pinGate.hidden = true;
