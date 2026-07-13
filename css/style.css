@@ -281,7 +281,7 @@ img, video { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: url('../assets/hero-tiktok-grid.jpg') center / cover no-repeat;
+  background: url('../assets/hero-tiktok-grid.webp') center / cover no-repeat;
 }
 
 .hero__bg-photo::after {
@@ -422,7 +422,7 @@ img, video { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../assets/camila-hero.png');
+  background-image: url('../assets/camila-hero.webp');
   background-size: cover;
   background-position: top center;
   filter: blur(22px) saturate(1.2);
