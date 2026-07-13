@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       visibleItems.forEach((item, i) => {
         const isVideo = item.resourceType === 'video';
-        const url = `https://res.cloudinary.com/${cloudName}/${item.resourceType}/upload/${item.public_id}.${item.format}`;
+        const url = `https://res.cloudinary.com/${cloudName}/${item.resourceType}/upload/q_auto,f_auto/${item.public_id}.${item.format}`;
         const thumb = isVideo
-          ? `https://res.cloudinary.com/${cloudName}/video/upload/so_1.0/${item.public_id}.jpg`
-          : url;
+          ? `https://res.cloudinary.com/${cloudName}/video/upload/so_1.0,q_auto,f_auto,w_500/${item.public_id}.jpg`
+          : `https://res.cloudinary.com/${cloudName}/image/upload/q_auto,f_auto,w_500/${item.public_id}.${item.format}`;
 
         const card = document.createElement('div');
         card.className = `portfolio__card reveal${i % 2 === 0 ? ' reveal--right' : ''}`;

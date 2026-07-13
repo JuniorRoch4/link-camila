@@ -110,9 +110,6 @@
   <h2 class="section-title">Conteúdo recente</h2>
   <p class="portfolio__desc">🎬 As últimas publicações, fresquinhas — dá o play e sente o ritmo. ✨</p>
 
-  <div class="portfolio__grid" id="portfolioGrid" data-limit="2"></div>
-  <p class="portfolio__empty" id="portfolioEmpty" hidden>Novidades chegando em breve ✨</p>
-
   <a href="portfolio-completo.html" class="btn btn--ghost-light portfolio__cta" target="_blank" rel="noopener">Ver portfólio completo ↗</a>
 </section>
 
@@ -172,7 +169,7 @@
       <a href="https://www.instagram.com/camila_schausse" class="btn btn--ghost-light" target="_blank" rel="noopener">📸 Instagram</a>
     </div>
   </div>
-  <img src="assets/footer-studio.webp" alt="" class="cta__art reveal">
+  <img src="assets/footer-studio.webp" alt="" class="cta__art reveal" loading="lazy">
 </section>
 
 <footer class="footer">
@@ -186,14 +183,6 @@
   </svg>
 </a>
 
-<!-- lightbox do portfólio: abre foto/vídeo clicado em tela cheia -->
-<div class="lightbox" id="lightbox" hidden>
-  <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
-  <div class="lightbox__content" id="lightboxContent"></div>
-</div>
-
-<script src="js/cloudinary-config.js"></script>
 <script src="js/script.js"></script>
-<script src="js/portfolio.js"></script>
 </body>
 </html>
